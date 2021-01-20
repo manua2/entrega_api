@@ -22,7 +22,6 @@ module.exports = (request, response) => {
                     // Agregamos token de usuario
                     userWithoutPassword.token = jwt.sign({
                         id: user._id,
-                        role: user.role
                     }, process.env.JWT_KEY, { expiresIn: '1h' })
 
                     // Retornamos el usuario
