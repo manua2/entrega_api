@@ -13,6 +13,7 @@ const mongoose = require('mongoose')
 // Controllers
 const login = require('./controllers/users/login')
 const register = require('./controllers/users/register')
+const createMatch = require('./controllers/matches/createMatch')
 
 // Connection string para conectarse a la base de datos
 let databaseConnectionString
