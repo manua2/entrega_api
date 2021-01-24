@@ -1,26 +1,33 @@
 const Joi = require("@hapi/joi");
 const matchModel = require("../../models/match");
-const userModel = require('../../models/user')
+const userModel = require("../../models/user");
 
 module.exports = async (request, response) => {
     const schema = Joi.object({
         player: Joi.string().required().email(),
 
-        opponent: Joi.string().required(),
+        opponent: Joi.string().required().email(),
     });
 
     const validationResult = schema.validate(request.body);
 
     var emailCheck;
-    await userModel.find({ 'email': request.body.opponent}, (error, user) => {
+    await userModel.find({ email: request.body.opponent }, (error, user) => {
         if (user[0] === undefined) {
-            emailCheck = false
+            emailCheck = false;
         } else if (user) {
-            emailCheck = true
+            emailCheck = true;
         }
-    })
+    });
 
-    if (!validationResult.error && emailCheck == true) {
+    var bad;
+    if (request.body.player === request.body.opponent) {
+        bad = true;
+    } else {
+        bad = false;
+    }
+
+    if (!validationResult.error && emailCheck == true && bad == false) {
         matchModel.create(
             {
                 player: request.body.player,
@@ -38,6 +45,10 @@ module.exports = async (request, response) => {
                 }
             }
         );
+    } else if (bad === true) {
+        response.status(403).json({
+            message: validationResult.error,
+        });
     } else {
         response.status(400).json({
             message: validationResult.error,
