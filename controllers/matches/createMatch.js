@@ -5,8 +5,8 @@ const userModel = require("../../models/user");
 module.exports = async (request, response) => {
     const schema = Joi.object({
         player: Joi.string().required().email(),
-
         opponent: Joi.string().required().email(),
+        finishedMatch: Joi.boolean().required(),
     });
 
     const validationResult = schema.validate(request.body);
@@ -32,6 +32,7 @@ module.exports = async (request, response) => {
             {
                 player: request.body.player,
                 opponent: request.body.opponent,
+                finishedMatch: request.body.finishedMatch,
             },
             (error, match) => {
                 if (error) {

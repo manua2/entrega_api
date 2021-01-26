@@ -8,5 +8,9 @@ module.exports = model('matches', new Schema({
     opponent: {
         type: String,
         require: true
+    },
+    finishedMatch: {
+        type: String,
+        require: true
     }
 }))
