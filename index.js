@@ -14,7 +14,7 @@ const mongoose = require('mongoose')
 const login = require('./controllers/users/login')
 const register = require('./controllers/users/register')
 const createMatch = require('./controllers/matches/createMatch')
-const getMatches = require('./controllers/matches/getMatches')
+const getAvailableMatches = require('./controllers/matches/getAvailableMatches')
 
 // Connection string para conectarse a la base de datos
 let databaseConnectionString
@@ -50,7 +50,7 @@ app.use(morgan('dev'))
 app.post('/login', login)
 app.post('/register', register)
 
-// app.get('/match', getMatches)
+app.get('/availableMatches', getAvailableMatches)
 app.post('/match', createMatch)
 
 mongoose.connect(databaseConnectionString, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }, (error) => {

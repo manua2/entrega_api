@@ -6,7 +6,7 @@ module.exports = async (request, response) => {
     const schema = Joi.object({
         player: Joi.string().required().email(),
         opponent: Joi.string().required().email(),
-        finishedMatch: Joi.boolean().required(),
+        finishedMatch: Joi.string().required(),
     });
 
     const validationResult = schema.validate(request.body);
