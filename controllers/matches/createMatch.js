@@ -7,6 +7,7 @@ module.exports = async (request, response) => {
         player: Joi.string().required().email(),
         opponent: Joi.string().required().email(),
         finishedMatch: Joi.string().required(),
+        moves: Joi.object().required(),
     });
 
     const validationResult = schema.validate(request.body);
@@ -33,6 +34,7 @@ module.exports = async (request, response) => {
                 player: request.body.player,
                 opponent: request.body.opponent,
                 finishedMatch: request.body.finishedMatch,
+                moves: request.body.moves
             },
             (error, match) => {
                 if (error) {
@@ -54,5 +56,6 @@ module.exports = async (request, response) => {
         response.status(400).json({
             message: validationResult.error,
         });
+        console.log(validationResult.error)
     }
 };

@@ -12,5 +12,9 @@ module.exports = model('matches', new Schema({
     finishedMatch: {
         type: String,
         require: true
+    },
+    moves: {
+        type: Object,
+        require: true,
     }
 }))
