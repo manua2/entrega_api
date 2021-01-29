@@ -25,7 +25,6 @@ module.exports = (request, response) => {
                 response.status(500).json({
                     message: "No se pudo obtener la partida",
                 });
-                console.log(error);
             } else {
                 response.json({
                     match,

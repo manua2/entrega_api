@@ -52,7 +52,7 @@ app.use(morgan('dev'))
 app.post('/login', login)
 app.post('/register', register)
 
-app.get('/availableMatches', getAvailableMatches)
+app.post('/availableMatches', getAvailableMatches)
 app.post('/createMatch', createMatch)
 app.get('/match/:id', getMatch)
 app.post('/playMatch', playMatch)
