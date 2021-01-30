@@ -13,6 +13,7 @@ module.exports = async (request, response) => {
         move_2_2: Joi.string(),
         move_3_1: Joi.string(),
         move_3_2: Joi.string(),
+        winner: Joi.string(),
     });
 
     const validationResult = schema.validate(request.body);
@@ -45,6 +46,7 @@ module.exports = async (request, response) => {
                 move_2_2: request.body.move_2_2,
                 move_3_1: request.body.move_3_1,
                 move_3_2: request.body.move_3_2,
+                winner: request.body.winner
             },
             (error, match) => {
                 if (error) {

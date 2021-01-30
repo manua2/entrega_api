@@ -26,12 +26,3 @@ npm run seed
 # Ejecutar API
 npm run dev
 ```
-
-## Testing
-```bash
-# Para correr tests unitarios ejecutar el siguiente comando
-npm run test
-```
-
-
-ver si se puede salvar la partida con cosas extra como quien gano o agregar finishedMatch a models etc

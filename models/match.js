@@ -37,4 +37,8 @@ module.exports = model('matches', new Schema({
         type: String,
         require: false,
     },
+    winner: {
+        type: String,
+        require: false,
+    }
 }))
