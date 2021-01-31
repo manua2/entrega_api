@@ -3,7 +3,7 @@
 ## Variables de entorno
 Crear archivo `.env` con variables de entorno (ejemplo debajo)
 ```
-PORT=3000
+PORT=3001
 
 DB_HOST=localhost
 DB_PORT=27017
