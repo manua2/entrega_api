@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const userModel = require('../../models/user')
 
 module.exports = (request, response) => {
-    userModel.findOne({ 'email': request.body.email }, (error, user) => {
+    userModel.findOne({ 'email': request.body.email.toLowerCase() }, (error, user) => {
         if (error) {
             response.status(500).json({
                 message: 'Error al intentar iniciar sesion'

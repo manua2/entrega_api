@@ -26,7 +26,7 @@ module.exports = (request, response) => {
 
         userModel.create({
             password: passwordHash,
-            email: request.body.email,
+            email: request.body.email.toLowerCase(),
             name: request.body.name
         }, (error, user) => {
             if (error) {
