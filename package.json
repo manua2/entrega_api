@@ -27,5 +27,8 @@
   "devDependencies": {
     "faker": "^4.1.0",
     "jest": "^26.1.0"
+  },
+  "engines": {
+    "node": "14.11.0"
   }
 }
