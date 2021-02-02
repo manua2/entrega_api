@@ -57,7 +57,7 @@ app.post('/createMatch', createMatch)
 app.get('/match/:id', getMatch)
 app.post('/playMatch', playMatch)
 
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }, (error) => {
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }, (error) => {
     if (error) {
         console.error('No fue posible conectarse a la base de datos', error)
     } else {
