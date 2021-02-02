@@ -57,8 +57,6 @@ app.post('/createMatch', createMatch)
 app.get('/match/:id', getMatch)
 app.post('/playMatch', playMatch)
 
-const MONGODB_URI = 'mongodb+srv://manua2:1gnMsEPRxkRjNstP@cluster0.hgymx.mongodb.net/RPSdb?retryWrites=true&w=majority'
-
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }, (error) => {
     if (error) {
         console.error('No fue posible conectarse a la base de datos', error)
