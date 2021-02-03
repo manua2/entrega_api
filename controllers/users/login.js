@@ -32,7 +32,7 @@ module.exports = (request, response) => {
                     response.status(401).end()
                 }
             } else {
-                response.status(401).end()
+                response.status(400).end()
             }
         }
     })

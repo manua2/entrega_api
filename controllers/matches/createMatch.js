@@ -27,6 +27,28 @@ module.exports = async (request, response) => {
         }
     });
 
+    var matchAlreadyExists;
+    await matchModel.find(
+        {
+            $and: [
+                {
+                    $and: [
+                        { player: request.body.player },
+                        { opponent: request.body.opponent },
+                    ],
+                },
+                { finishedMatch: "false" },
+            ],
+        },
+        (error, match) => {
+            if (match[0] !== undefined) {
+                matchAlreadyExists = true;
+            } else {
+                matchAlreadyExists = false;
+            }
+        }
+    );
+
     var bad;
     if (request.body.player === request.body.opponent) {
         bad = true;
@@ -34,7 +56,12 @@ module.exports = async (request, response) => {
         bad = false;
     }
 
-    if (!validationResult.error && emailCheck == true && bad == false) {
+    if (
+        !validationResult.error &&
+        emailCheck == true &&
+        bad == false &&
+        matchAlreadyExists == false
+    ) {
         matchModel.create(
             {
                 player: request.body.player,
@@ -46,7 +73,7 @@ module.exports = async (request, response) => {
                 move_2_2: request.body.move_2_2,
                 move_3_1: request.body.move_3_1,
                 move_3_2: request.body.move_3_2,
-                winner: request.body.winner
+                winner: request.body.winner,
             },
             (error, match) => {
                 if (error) {
@@ -61,13 +88,12 @@ module.exports = async (request, response) => {
             }
         );
     } else if (bad === true) {
-        response.status(403).json({
-            message: validationResult.error,
-        });
+        response.status(403);
+    } else if (matchAlreadyExists == true) {
+        response.status(406);
     } else {
         response.status(400).json({
             message: validationResult.error,
         });
-        console.log(validationResult.error);
     }
 };
