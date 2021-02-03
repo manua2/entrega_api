@@ -88,9 +88,9 @@ module.exports = async (request, response) => {
             }
         );
     } else if (bad === true) {
-        response.status(403);
+        response.status(403).json({});
     } else if (matchAlreadyExists == true) {
-        response.status(406);
+        response.status(406).json({});
     } else {
         response.status(400).json({
             message: validationResult.error,
