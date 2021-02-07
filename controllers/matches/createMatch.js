@@ -16,10 +16,12 @@ module.exports = async (request, response) => {
         winner: Joi.string(),
     });
 
+    const opponentFixed = request.body.opponent.toLowerCase()
+
     const validationResult = schema.validate(request.body);
 
     var emailCheck;
-    await userModel.find({ email: request.body.opponent }, (error, user) => {
+    await userModel.find({ email: opponentFixed }, (error, user) => {
         if (user[0] === undefined) {
             emailCheck = false;
         } else if (user) {
@@ -34,7 +36,7 @@ module.exports = async (request, response) => {
                 {
                     $and: [
                         { player: request.body.player },
-                        { opponent: request.body.opponent },
+                        { opponent: opponentFixed },
                     ],
                 },
                 { finishedMatch: "false" },
@@ -50,7 +52,7 @@ module.exports = async (request, response) => {
     );
 
     var bad;
-    if (request.body.player === request.body.opponent) {
+    if (request.body.player === opponentFixed) {
         bad = true;
     } else {
         bad = false;
@@ -59,13 +61,14 @@ module.exports = async (request, response) => {
     if (
         !validationResult.error &&
         emailCheck == true &&
-        bad == false &&
-        matchAlreadyExists == false
+        bad == false 
+        // &&
+        // matchAlreadyExists == false
     ) {
         matchModel.create(
             {
                 player: request.body.player,
-                opponent: request.body.opponent,
+                opponent: opponentFixed,
                 finishedMatch: request.body.finishedMatch,
                 move_1_1: request.body.move_1_1,
                 move_1_2: request.body.move_1_2,

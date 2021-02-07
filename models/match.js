@@ -3,11 +3,13 @@ const { model, Schema } = require('mongoose')
 module.exports = model('matches', new Schema({
     player: {
         type: String,
-        require: true
+        require: true,
+        trim: true
     },
     opponent: {
         type: String,
-        require: true
+        require: true,
+        trim: true
     },
     finishedMatch: {
         type: String,

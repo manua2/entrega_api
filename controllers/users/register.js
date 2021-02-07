@@ -5,7 +5,6 @@ const userModel = require('../../models/user')
 module.exports = (request, response) => {
     const schema = Joi.object({
         name: Joi.string()
-            .alphanum()
             .required(),
 
         password: Joi.string()
