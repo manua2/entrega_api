@@ -16,7 +16,7 @@ module.exports = async (request, response) => {
         winner: Joi.string(),
     });
 
-    const opponentFixed = request.body.opponent.toLowerCase()
+    const opponentFixed = request.body.opponent.toLowerCase();
 
     const validationResult = schema.validate(request.body);
 
@@ -61,9 +61,8 @@ module.exports = async (request, response) => {
     if (
         !validationResult.error &&
         emailCheck == true &&
-        bad == false 
-        // &&
-        // matchAlreadyExists == false
+        bad == false &&
+        matchAlreadyExists == false
     ) {
         matchModel.create(
             {
